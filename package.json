@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-multi-carousel": "^2.8.5",
+    "react-native": "^0.76.1"
+  }
+}
