@@ -25,6 +25,31 @@
   width: 100%;
 }
 
+.animated1 {
+  margin-top: 20vh;
+  display: inline-block;
+  height: 400px;
+  width: 100%;
+  border-radius: 40px;
+  animation: 3s linear 1s infinite running slidein;
+}
+.animated2 {
+  margin-top: 20vh;
+  display: inline-block;
+  height: 400px;
+  width: 100%;
+  border-radius: 40px;
+  animation: 3s linear 1s infinite running slidein;
+
+}
+.animated3 {
+  margin-top: 20vh;
+  display: inline-block;
+  height: 400px;
+  width: 100%;
+
+}
+
 
 
 
