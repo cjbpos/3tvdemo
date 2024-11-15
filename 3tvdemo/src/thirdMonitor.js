@@ -13,6 +13,7 @@ const images = [celery, broccoli, bell, carrot, lettuce];
 const delay = 10000;
 var count = 0;
 
+
 function ThirdMonitor() {
     const [index, setIndex] = React.useState(0);
   const timeoutRef = React.useRef(null);
@@ -36,7 +37,7 @@ function ThirdMonitor() {
   }, [index]);
 
   function renderContent(){
-    if(count <= 20)
+    if(count <= 12)
     {
 
       return <div className='slideshowSlider'
@@ -51,11 +52,10 @@ function ThirdMonitor() {
       </div>
 
     }
-    else if(count <= 42){
+    else if(count <= 14){
       return (
         <div className='slideshowSlider'> 
             <video className='animated3' src={vid3} autoPlay loop muted/>
-      
         </div>
    
       )

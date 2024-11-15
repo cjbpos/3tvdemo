@@ -14,7 +14,8 @@ const delay = 10000;
 var count = 0;
 
 function FirstMonitor() {
-    const [index, setIndex] = React.useState(0);
+
+  const [index, setIndex] = React.useState(0);
   const timeoutRef = React.useRef(null);
 
   function resetTimeout() {
@@ -36,7 +37,7 @@ function FirstMonitor() {
   }, [index]);
 
   function renderContent(){
-    if(count <= 20)
+    if(count <= 12)
     {
 
       return <div className='slideshowSlider'
@@ -51,7 +52,7 @@ function FirstMonitor() {
       </div>
 
     }
-    else if(count <= 42){
+    else if(count <= 14){
       return (
         <div className='slideshowSlider'> 
             <video className='animated1' src={vid1} autoPlay loop muted/>

@@ -38,7 +38,7 @@ function SecondMonitor() {
 
 
       function renderContent(){
-        if(count <= 20)
+        if(count <= 12)
         {
     
           return <div className='slideshowSlider'
@@ -53,7 +53,7 @@ function SecondMonitor() {
           </div>
     
         }
-        else if(count <= 42){
+        else if(count <= 14){
           return (
             <div className='slideshowSlider'> 
                 <video className='animated2' src={vid2} autoPlay loop muted/>

@@ -5,9 +5,14 @@ import FirstMonitor from "./firstMonitor";
 import SecondMonitor from "./SecondMonitor";
 import ThirdMonitor from "./thirdMonitor";
 
+import RefreshListener from "./RefreshListener";
+import RefreshOnUnload from "./RefreshOnUnload";
+
 export default function AllRoutes() {
     return (
         <Router>
+            <RefreshListener />
+            <RefreshOnUnload />
             <Routes>
                 <Route path="/" element={<FirstMonitor/>}></Route>
                 <Route path="/second" element={<SecondMonitor/>}></Route>
