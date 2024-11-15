@@ -55,11 +55,7 @@ function SecondMonitor() {
         }
         else if(count <= 14){
           return (
-            <div className='slideshowSlider'> 
-                <video className='animated2' src={vid2} autoPlay loop muted/>
-          
-            </div>
-       
+            <video src={vid2} autoPlay muted />
           )
           
         }

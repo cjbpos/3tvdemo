@@ -54,11 +54,7 @@ function FirstMonitor() {
     }
     else if(count <= 14){
       return (
-        <div className='slideshowSlider'> 
-            <video className='animated1' src={vid1} autoPlay loop muted/>
-      
-        </div>
-   
+        <video src={vid1} autoPlay muted />
       )
       
     }

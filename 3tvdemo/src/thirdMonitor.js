@@ -54,13 +54,10 @@ function ThirdMonitor() {
     }
     else if(count <= 14){
       return (
-        <div className='slideshowSlider'> 
-            <video className='animated3' src={vid3} autoPlay loop muted/>
-        </div>
-   
+        <video src={vid3} autoPlay muted />
       )
-      
     }
+
     else{
       count = 0;
     }
