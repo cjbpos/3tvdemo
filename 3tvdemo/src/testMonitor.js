@@ -1,22 +1,16 @@
-import watermelon from './images/watermelon.png';
-import mango from'./images/mango.png';
-import banana from './images/banana.png';
-import blue from './images/blueberry.png';
-import strawberry from './images/strawberry.png';
+import "./App.css";
+import React from "react";
 
+import carrot from './images/carrots.png'
+import banana from './images/banana.png'
+import bbq from './images/bbq.png'
 import vid1 from './images/c1.mp4'
 
-import React from 'react';
-import './App.css';
-
-const slides = [watermelon, mango, banana, blue, strawberry];
-//const delay = 10000;
-//var count = 0;
-
-function FirstMonitor() {
-  const [currentSlide, setCurrentSlide] = React.useState(0);
+function TestMonitor() {
+    const [currentSlide, setCurrentSlide] = React.useState(0);
     const [showVideo, setShowVideo] = React.useState(false);
     const videoRef = React.useRef(null);
+    const slides = [carrot,banana,bbq];
 
     React.useEffect(() => {
         let slideInterval;
@@ -24,7 +18,7 @@ function FirstMonitor() {
         const startSlideshow = () => {
             slideInterval = setInterval(() => {
                 setCurrentSlide((prevSlide) => (prevSlide+1) % slides.length);
-            }, 10000);
+            }, 2000);
         };
 
         startSlideshow();
@@ -35,7 +29,7 @@ function FirstMonitor() {
             if(videoRef.current) {
                 videoRef.current.play();
             }
-        }, 60000);
+        }, 10000);
     
         const handleVideoEnd = () => {
             setShowVideo(false);
@@ -51,7 +45,7 @@ function FirstMonitor() {
                 if(videoRef.current){
                     videoRef.current.play()
                 }
-            }, 60000)
+            }, 10000)
         };
 
         if (videoRef.current) {
@@ -84,8 +78,6 @@ function FirstMonitor() {
        </div>
     </div>
     );
+};
 
- 
-}
-
-export default FirstMonitor;
+export default TestMonitor;

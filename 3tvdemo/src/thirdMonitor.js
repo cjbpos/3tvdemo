@@ -9,65 +9,83 @@ import vid3 from './images/c3.mp4';
 import './App.css';
 import React from 'react';
 
-const images = [celery, broccoli, bell, carrot, lettuce];
-const delay = 10000;
-var count = 0;
+const slides = [celery, broccoli, bell, carrot, lettuce];
+//const delay = 10000;
+//var count = 0;
 
 
 function ThirdMonitor() {
-    const [index, setIndex] = React.useState(0);
-  const timeoutRef = React.useRef(null);
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+    const [showVideo, setShowVideo] = React.useState(false);
+    const videoRef = React.useRef(null);
 
-  function resetTimeout() {
-    if(timeoutRef.current) {
-      count++; //every 10 counts it resets, therefore there is 50 seconds per reset
-      //console.log(count); //that is at count 24 we need to show video.
-      clearTimeout(timeoutRef.current);
-    }
-  }
-  
-  React.useEffect(()=> {
-    resetTimeout();
-    timeoutRef.current = setTimeout(() =>
-    setIndex((prevIndex)=> 
-      prevIndex === images.length - 1 ? 0 : prevIndex+1), delay);
-    return () => {
-      resetTimeout();
-    };
-  }, [index]);
+    React.useEffect(() => {
+        let slideInterval;
+        
+        const startSlideshow = () => {
+            slideInterval = setInterval(() => {
+                setCurrentSlide((prevSlide) => (prevSlide+1) % slides.length);
+            }, 10000);
+        };
 
-  function renderContent(){
-    if(count <= 12)
-    {
+        startSlideshow();
 
-      return <div className='slideshowSlider'
-      style={{transform: `translate3d(${-index * 100}%,0,0)`}}>
-        {images.map((backgroundImage, index) =>
-        (<div
-          className='slide'
-          key={index}
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        ></div>)
-      )}       
-      </div>
+        const videoTimeout = setTimeout(() => {
+            setShowVideo(true);
+            clearInterval(slideInterval);
+            if(videoRef.current) {
+                videoRef.current.play();
+            }
+        }, 60000);
+    
+        const handleVideoEnd = () => {
+            setShowVideo(false);
+        
+            if(videoRef.current){
+                videoRef.current.pause();
+                videoRef.current.currentTime = 0;
+            }
+            startSlideshow();
+            setTimeout(() => {
+                setShowVideo(true);
+                clearInterval(slideInterval);
+                if(videoRef.current){
+                    videoRef.current.play()
+                }
+            }, 60000)
+        };
 
-    }
-    else if(count <= 14){
-      return (
-        <video src={vid3} autoPlay muted />
-      )
-    }
+        if (videoRef.current) {
+            videoRef.current.addEventListener('ended', handleVideoEnd)
+        }
+        return () => {
+            clearInterval(slideInterval);
+            clearInterval(videoTimeout);
+            if (videoRef.current) {
+                videoRef.current.removeEventListener('ended', handleVideoEnd)
+            }
+        };
+    }, [slides.length]);
 
-    else{
-      count = 0;
-    }
-  }
-
-  return (
-    <div className="slideshow">
-      {renderContent()}; 
+    return (
+    <div className="newSlideshow">
+        {slides.map((slide,index) => (
+            <div key={index}
+            className={`newSlide ${index === currentSlide && !showVideo ? 'active' : ''}`}>
+                <img src={slide} alt={`Slide ${index+1}`} />
+            </div>    
+        ))}
+        <div className={`video-container ${showVideo? 'visible': 'hidden'}`}>
+            <video 
+            ref={videoRef}
+            muted>
+                <source src={vid3} type="video/mp4" />
+                Your browser does not support video type
+            </video>
+       </div>
     </div>
-  );
+    );
+  
 }
 
 export default ThirdMonitor;
