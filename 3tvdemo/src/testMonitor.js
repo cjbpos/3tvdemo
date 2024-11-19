@@ -12,7 +12,7 @@ function TestMonitor() {
     const videoRef = React.useRef(null);
     const slides = [carrot,banana,bbq];
 
-    React.useEffect(() => {
+    /*React.useEffect(() => {
         let slideInterval;
         
         const startSlideshow = () => {
@@ -46,7 +46,30 @@ function TestMonitor() {
                     videoRef.current.play()
                 }
             }, 10000)
-        };
+        };*/
+
+        React.useEffect(() => { 
+            let slideInterval; 
+            let videoTimeout; 
+            const startSlideshow = () => { 
+                slideInterval = setInterval(() => 
+                    { setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+
+                    }, 5000); };
+                const startVideoPlayback = () => { 
+                    setShowVideo(true); 
+                    clearInterval(slideInterval); 
+                    if (videoRef.current) { videoRef.current.play(); } }; 
+                    const handleVideoEnd = () => {
+                         setShowVideo(false); 
+                         if (videoRef.current) { 
+                            videoRef.current.pause(); 
+                            videoRef.current.currentTime = 0; 
+                        } startSlideshow(); 
+                        videoTimeout = setTimeout(startVideoPlayback, 30000); 
+                    }; 
+                    startSlideshow(); 
+                    videoTimeout = setTimeout(startVideoPlayback, 30000);
 
         if (videoRef.current) {
             videoRef.current.addEventListener('ended', handleVideoEnd)
