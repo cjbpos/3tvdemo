@@ -30,7 +30,7 @@ function FirstMonitor() {
     
         const startSlideshow = () => {
             slideInterval = setInterval(() => {
-                setCurrentSlide((prevSlide) => (prevSlide + 2) % slides.length);
+                setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
             }, 10000);
         };
     
@@ -84,9 +84,9 @@ function FirstMonitor() {
         <div className={`video-container ${showVideo? 'visible': 'hidden'}`}>
             <video 
             ref={videoRef}
-            muted={true}>
-                <source src={vid1} type="video/mp4" />
-                Your browser does not support video type
+            muted={true}
+            src={vid1}
+            playsInline>
             </video>
        </div>
     </div>
