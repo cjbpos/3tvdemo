@@ -16,7 +16,7 @@ const slides = [meat, chicken, bbq, rib, steak]
 function SecondMonitor() {
     
 
-    useWebSocket('ws://localhost:8080');
+    useWebSocket('ws://192.168.88.92:8080');
     
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [showVideo, setShowVideo] = React.useState(false);

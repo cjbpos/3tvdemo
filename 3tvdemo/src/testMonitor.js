@@ -8,9 +8,9 @@ import bbq from './images/bbq.png'
 import vid1 from './images/c1.mp4'
 
 import ReactPlayer from 'react-player';
-import a from '/Users/Carlos Jimenez/Documents/3tvdemo/3tvdemo/src/images/c1.mp4' 
 
-const vidPath = 'http://localhost/sdcard/Users/Carlos Jimenez/Documents/3tvdemo/3tvdemo/src/images/c1.mp4'
+const localWebServerUrl = 'http://192.168.88.92:8080/video';
+
 
 
 /*function TestMonitor() {
@@ -144,7 +144,7 @@ const vidPath = 'http://localhost/sdcard/Users/Carlos Jimenez/Documents/3tvdemo/
 
 
 function TestMonitor() {
-    useWebSocket('ws://localhost:8080');
+    useWebSocket('ws://192.168.88.92:8080');
 
     const [currentSlide, setCurrentSlide] = React.useState(0);
     const [showVideo, setShowVideo] = React.useState(false);
@@ -153,6 +153,7 @@ function TestMonitor() {
     // Refs to hold interval and timeout IDs
     const slideIntervalRef = React.useRef(null);
     const videoTimeoutRef = React.useRef(null);
+    const playerRef = React.useRef(null);
 
     const startSlideshow = () => {
         slideIntervalRef.current = setInterval(() => {
@@ -161,15 +162,14 @@ function TestMonitor() {
     };
 
     const handleVideoEnd = () => {
-        console.log('Video ended, restarting slideshow');
         setShowVideo(false);
         startSlideshow();
-        videoTimeoutRef.current = setTimeout(() => setShowVideo(true), 30000); // Schedule next video playback
+        videoTimeoutRef.current = setTimeout(() => setShowVideo(true), 20000); // Schedule next video playback
     };
 
     React.useEffect(() => {
         startSlideshow();
-        videoTimeoutRef.current = setTimeout(() => setShowVideo(true), 30000);
+        videoTimeoutRef.current = setTimeout(() => setShowVideo(true), 20000);
 
         return () => {
             if (slideIntervalRef.current) {
@@ -180,6 +180,13 @@ function TestMonitor() {
             }
         };
     }, [slides.length]);
+
+    React.useEffect(() => {
+        if(playerRef.current) {
+            playerRef.current.getInternalPlayer().muted = true;
+
+        }
+    }, [showVideo]);
 
     return (
         <div className="newSlideshow">
@@ -192,8 +199,9 @@ function TestMonitor() {
             {showVideo && (
                 <div className={`video-container ${showVideo ? 'visible' : 'hidden'}`}>
                     <ReactPlayer
-                        url={vidPath}
-                        muted
+                        url={localWebServerUrl}
+                        playing
+                        muted={true}
                         width="100%"
                         height="100vh"
                         onEnded={handleVideoEnd} // Correctly pass the function

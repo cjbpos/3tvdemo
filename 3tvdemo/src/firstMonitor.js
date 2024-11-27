@@ -16,7 +16,7 @@ const slides = [watermelon, mango, banana, blue, strawberry];
 function FirstMonitor() {
    
 
-    useWebSocket('ws://localhost:8080');
+    useWebSocket('ws://192.168.88.92:8080');
 
     const [currentSlide, setCurrentSlide] = React.useState(0);
     const [showVideo, setShowVideo] = React.useState(false);
@@ -84,7 +84,7 @@ function FirstMonitor() {
         <div className={`video-container ${showVideo? 'visible': 'hidden'}`}>
             <video 
             ref={videoRef}
-            muted>
+            muted={true}>
                 <source src={vid1} type="video/mp4" />
                 Your browser does not support video type
             </video>
